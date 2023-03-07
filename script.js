@@ -3,6 +3,10 @@ var startBtn = document.getElementById("start-button");
 var heading = document.querySelector("h1");
 var btnDiv = document.querySelector("div");
 
+
+
+
+
 // creates a button
 
 var btnCreate = document.createElement("button");
@@ -67,17 +71,41 @@ function CheckAnswer(firstQuestion, newButton, secondsLeft) {
       console.log("You have selected the correct answer ");
 
       console.log("user score is " + userScore);
-    } else buttonText != firstQuestion.correctAnswer;
+     
+    } else
 
     {
       console.log("you clicked the wrong answer!");
       secondsLeft = secondsLeft - 5;
       console.log("seconds left after wrong answer " + secondsLeft);
+     
     }
+
+    clearButtons();
   });
+
+ 
+ 
+
 }
 
+
+function clearButtons () {
+
+  var allButtons = document.querySelectorAll("button");
+
+  for (var i = 0; i < allButtons.length; i++) {
+    allButtons[i].remove();
+  };
+
+};
+
 //  3 when an answer is seleted presented with another answer
+
+function nextQuestionSet() {
+ 
+
+}
 
 // 4 if i click the wrong answer time is removed from the timer
 
