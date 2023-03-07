@@ -2,131 +2,113 @@ var timeEl = document.getElementById("timer");
 var startBtn = document.getElementById("start-button");
 var heading = document.querySelector("h1");
 var btnDiv = document.querySelector("div");
-
-
-
-
-
-// creates a button
-
-var btnCreate = document.createElement("button");
-
-// 1  When start button is pressed a timer starts
-
-let secondsLeft = 20;
-
-function setTime() {
-  var timerInterval = setInterval(function () {
-    secondsLeft--;
-    timeEl.textContent = "Time Left: " + secondsLeft;
-
-    if (secondsLeft <= 0) {
-      // Stops execution of action at set interval
-      clearInterval(timerInterval);
-      // also run future function to display game over
-    }
-  }, 1000);
-}
+var questions = [
+  {
+    title: "Question 1",
+    options: ["Option 1", "Option 2", "Option 3", "Option 4"],
+    answer: 1
+  },
+  {
+    title: "Question 2",
+    options: ["Option 1", "Option 2", "Option 3", "Option 4"],
+    answer: 2
+  },
+  {
+    title: "Question 3",
+    options: ["Option 1", "Option 2", "Option 3", "Option 4"],
+    answer: 0
+  }
+];
+var userScore = 0;
+var currentQuestion = 0;
+var secondsLeft = 60;
+var timerInterval;
 
 startBtn.addEventListener("click", startQuiz);
 
 function startQuiz() {
   setTime();
-  questionSet();
+  showQuestion();
 }
 
-//  2 Same time the timer starts the page changes with a question and set of answers
+function setTime() {
+  timerInterval = setInterval(function() {
+    secondsLeft--;
+    timeEl.textContent = "Time Left: " + secondsLeft;
 
-var firstQuestion = {
-  questionTitle: "this is a sample question 1",
+    if (secondsLeft <= 0) {
+      clearInterval(timerInterval);
+      gameOver();
+    }
+  }, 1000);
+}
 
-  questions: ["what is a", "what is b", "what is c", "what is d"],
-
-  correctAnswer: ["what is b"],
-};
-
-function questionSet() {
-  heading.innerText = firstQuestion.questionTitle;
-
-  startBtn.remove();
-
-  for (let i = 0; i < firstQuestion.questions.length; i++) {
-    let newButton = document.createElement("button");
-    newButton.textContent = firstQuestion.questions[i];
+function showQuestion() {
+  heading.textContent = questions[currentQuestion].title;
+  btnDiv.innerHTML = "";
+  for (var i = 0; i < questions[currentQuestion].options.length; i++) {
+    var newButton = document.createElement("button");
+    newButton.textContent = questions[currentQuestion].options[i];
     btnDiv.appendChild(newButton);
-    CheckAnswer(firstQuestion, newButton);
   }
 }
 
-// Button Listner function to see if answer is correct or wrong
-
-let userScore = 0;
-
-function CheckAnswer(firstQuestion, newButton, secondsLeft) {
-  newButton.addEventListener("click", function () {
-    const buttonText = newButton.textContent;
-
-    if (buttonText == firstQuestion.correctAnswer) {
+btnDiv.addEventListener("click", function(event) {
+  if (currentQuestion >= 0 && event.target.matches("button") && event.target !== startBtn) {
+    var selectedOption = event.target.textContent;
+    if (selectedOption === questions[currentQuestion].options[questions[currentQuestion].answer]) {
       userScore++;
-      console.log("You have selected the correct answer ");
-
-      console.log("user score is " + userScore);
-     
-    } else
-
-    {
-      console.log("you clicked the wrong answer!");
-      secondsLeft = secondsLeft - 5;
-      console.log("seconds left after wrong answer " + secondsLeft);
-     
+      console.log("You have selected the correct answer");
+      console.log("User score is " + userScore);
+    } else {
+      console.log("You clicked the wrong answer!");
+      secondsLeft -= 5;
+      console.log("Seconds left after wrong answer " + secondsLeft);
     }
+    currentQuestion++;
+    if (currentQuestion === questions.length) {
+      clearInterval(timerInterval);
+      gameOver();
+    } else {
+      showQuestion();
+    }
+  }
+});
 
-    clearButtons();
+function gameOver() {
+  clearInterval(timerInterval);
+  var btnDiv = document.querySelector("div");
+  btnDiv.innerHTML = "";
+  heading.textContent = "Game Over";
+}
+
+
+
+
+function gameOver() {
+  clearInterval(timerInterval);
+  var btns = document.querySelectorAll("div button");
+  btns.forEach(function(btn) {
+    btn.remove();
   });
-
- 
- 
-
+  heading.textContent = "Game Over";
 }
 
 
-function clearButtons () {
+// //  5 when all questions are answered or the timer reaches zero the game is over
 
-  var allButtons = document.querySelectorAll("button");
+// /*
+// function for when all questions are answered or secondsLeft = 0 presented with gameover screen and..
+// */
 
-  for (var i = 0; i < allButtons.length; i++) {
-    allButtons[i].remove();
-  };
+// // 6 Once quiz over i can save my initals and score
 
-};
+// /*
 
-//  3 when an answer is seleted presented with another answer
+// form to enter initals 
 
-function nextQuestionSet() {
- 
+// save score to local storage
 
-}
+// then retrieve and make visible on highscore screen 
 
-// 4 if i click the wrong answer time is removed from the timer
-
-/*function with if statments that will change timerInterval funciton
-
-*/
-
-//  5 when all questions are answered or the timer reaches zero the game is over
-
-/*
-function for when all questions are answered or secondsLeft = 0 presented with gameover screen and..
-*/
-
-// 6 Once quiz over i can save my initals and score
-
-/*
-
-form to enter initals 
-
-save score to local storage
-
-then retrieve and make visible on highscore screen 
-
-*/
+// */
