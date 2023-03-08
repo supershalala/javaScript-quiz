@@ -118,11 +118,36 @@ button.setAttribute("type", "button");
 button.textContent = "Submit";
 button.addEventListener("click", function() {
   const inputText = document.getElementById("text-input").value;
-  // Store to local storage once the button is selected 
-  localStorage.setItem("User Score", userScore);
-  localStorage.setItem("User Initals", inputText );
-  console.log("Submitted text: ", inputText);
+
+     // Create a new highScores object with the user's initials and score
+     const highScores = {
+      initials: inputText,
+      score: userScore
+    };
+
+    // Retrieve all the highscores from local storage
+    let allHighScores = JSON.parse(localStorage.getItem("highScores"));
+
+    // If there are no highscores in local storage, initialize the array with an empty array
+    if (!allHighScores) {
+      allHighScores = [];
+    }
+
+    // Push the new highScores object to the array
+    allHighScores.push(highScores);
+
+    // Store the updated highscores array in local storage
+    localStorage.setItem("highScores", JSON.stringify(allHighScores));
+
+    console.log("highscores ", highScores);
+    console.log("all high scores ", allHighScores);
+
+  
+ 
+  
 });
+
+
 
 // Display user score at game over screen
 
