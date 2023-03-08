@@ -62,7 +62,7 @@ btnDiv.addEventListener("click", function(event) {
       console.log("User score is " + userScore);
     } else {
       console.log("You clicked the wrong answer!");
-      secondsLeft -= 5;
+      secondsLeft -= 10;
       console.log("Seconds left after wrong answer " + secondsLeft);
     }
     currentQuestion++;
@@ -83,15 +83,54 @@ function gameOver() {
 }
 
 
-
+console.log (userScore, " user score");
 
 function gameOver() {
   clearInterval(timerInterval);
+  timeEl.textContent = "";
   var btns = document.querySelectorAll("div button");
   btns.forEach(function(btn) {
     btn.remove();
   });
   heading.textContent = "Game Over";
+
+  btnDiv.createElement
+
+  // text input to add initals to show 
+
+// Create the form element
+const form = document.createElement("form");
+
+// Create the label element and set its attributes
+const label = document.createElement("label");
+label.setAttribute("for", "text-input");
+label.textContent = "Enter your initals ";
+
+// Create the text input element and set its attributes
+const input = document.createElement("input");
+input.setAttribute("type", "text");
+input.setAttribute("id", "text-input");
+input.setAttribute("name", "text-input");
+
+// Create the button element and set its attributes and event listener
+const button = document.createElement("button");
+button.setAttribute("type", "button");
+button.textContent = "Submit";
+button.addEventListener("click", function() {
+  const inputText = document.getElementById("text-input").value;
+  // do something with the input text here, such as sending it to a server
+  console.log("Submitted text: ", inputText);
+});
+
+// Append the label, input, and button elements to the form element
+form.appendChild(label);
+form.appendChild(input);
+form.appendChild(button);
+
+// Append the form element to the document body
+document.body.appendChild(form);
+
+
 }
 
 
