@@ -75,12 +75,12 @@ btnDiv.addEventListener("click", function(event) {
   }
 });
 
-function gameOver() {
-  clearInterval(timerInterval);
-  var btnDiv = document.querySelector("div");
-  btnDiv.innerHTML = "";
-  heading.textContent = "Game Over";
-}
+// function gameOver() {
+//   clearInterval(timerInterval);
+//   var btnDiv = document.querySelector("div");
+//   btnDiv.innerHTML = "";
+//   heading.textContent = "Game Over";
+// }
 
 
 console.log (userScore, " user score");
@@ -118,9 +118,19 @@ button.setAttribute("type", "button");
 button.textContent = "Submit";
 button.addEventListener("click", function() {
   const inputText = document.getElementById("text-input").value;
-  // do something with the input text here, such as sending it to a server
+  // Store to local storage once the button is selected 
+  localStorage.setItem("User Score", userScore);
+  localStorage.setItem("User Initals", inputText );
   console.log("Submitted text: ", inputText);
 });
+
+// Display user score at game over screen
+
+const displayScore = document.createElement("h2");
+displayScore.textContent = "Your score is "+ userScore;
+// append to the h1
+
+document.body.appendChild(displayScore);
 
 // Append the label, input, and button elements to the form element
 form.appendChild(label);
@@ -129,7 +139,6 @@ form.appendChild(button);
 
 // Append the form element to the document body
 document.body.appendChild(form);
-
 
 }
 
