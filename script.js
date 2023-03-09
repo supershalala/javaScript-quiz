@@ -5,19 +5,19 @@ var btnDiv = document.querySelector("div");
 
 var questions = [
   {
-    title: "Question 1",
-    options: ["Option 1", "Option 2", "Option 3", "Option 4"],
-    answer: 1,
+    title: "What is the keyword used to declare a variable in JavaScript?",
+    options: ["var", "let", "const", "All of the above"],
+    answer: 0,
   },
   {
-    title: "Question 2",
-    options: ["Option 1", "Option 2", "Option 3", "Option 4"],
+    title: "What is the scope of a variable declared using the 'let' keyword?",
+    options: ["Global", "Local", "Block", "All of the above"],
     answer: 2,
   },
   {
-    title: "Question 3",
-    options: ["Option 1", "Option 2", "Option 3", "Option 4"],
-    answer: 0,
+    title: "Which of the following variables cannot be reassigned a new value once initialized?",
+    options: ["var", "let", "const", "None of the above"],
+    answer: 2,
   },
 ];
 var userScore = 0;
@@ -157,7 +157,7 @@ function gameOver() {
   
 
     // reload page once all done
-    //  location.reload();
+     location.reload();
   });
 
   // Display user score at game over screen
