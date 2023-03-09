@@ -19,6 +19,8 @@ This quiz was built entirely out of vanilla JS. It was created to test my knowle
 
 ## Link to Quiz
 
+- Click here to go to the quiz https://supershalala.github.io/javaScript-quiz
+
 ## Screenshot 
 
 The following image shows the web application's appearance and functionality:
