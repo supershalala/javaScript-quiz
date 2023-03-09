@@ -22,7 +22,7 @@ var questions = [
 ];
 var userScore = 0;
 var currentQuestion = 0;
-var secondsLeft = 60;
+var secondsLeft = 40;
 var timerInterval;
 
 startBtn.addEventListener("click", startQuiz);
@@ -118,6 +118,7 @@ function gameOver() {
   // Create the text input element and set its attributes
   const input = document.createElement("input");
   input.setAttribute("type", "text");
+  input.setAttribute("maxlength", "2");
   input.setAttribute("id", "text-input");
   input.setAttribute("name", "text-input");
 
@@ -180,7 +181,6 @@ function gameOver() {
 
 var highScoresLink = document.getElementById("high-scores");
 
-// When i click on high Scores button i can see the highest 10 scores
 
 
 highScoresLink.addEventListener("click", function () {
@@ -215,8 +215,10 @@ scores = scores.slice(0, 10);
   console.log("you have clicked the high scores button!");
   // remove existing elements on the page
   timeEl.remove();
-  heading.textContent = "High Scores";
+  heading.textContent = "";
   startBtn.remove();
+  btnDiv.remove();
+  highScoresLink.remove();
 
   // create highscore div and elements
 
@@ -225,11 +227,22 @@ scores = scores.slice(0, 10);
   let highScoreDiv = document.createElement("div");
   document.body.appendChild(highScoreDiv);
 
+  let hishScoresTitle = document.createElement("h2");
+  hishScoresTitle.innerText="HIGH SCORES";
+  highScoreDiv.appendChild(hishScoresTitle);
+
   let highScoreUl = document.createElement("ol");
   highScoreDiv.appendChild(highScoreUl);
 
   let li = document.createElement("li");
   highScoreUl.appendChild(li);
+
+  // create button that starts game again
+
+  const button = document.createElement("button");
+  button.setAttribute("onClick", "window.location.reload()");
+  button.textContent = "Play Again!";
+  highScoreDiv.appendChild(button);
 
   // Map the scoresArray to an array of <li> elements as strings
 const highScoresHTML = scoresArray.map((score) => {
